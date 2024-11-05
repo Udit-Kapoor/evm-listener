@@ -1,4 +1,4 @@
-import { ethers } from "ethers";
+import { ethers, EventLog } from "ethers";
 import { abi } from "./abi/tokenAbi";
 
 const contractAddress = "0xcDf91bf87b31035b15D0eFA43d03e86d80aeCD88";
@@ -26,7 +26,9 @@ async function pollForEvents() {
   );
 
   events.forEach((event) => {
-    console.log("New event found:", event);
+    console.log("New Event Found. Wallet Approved: ");
+    const item = event as EventLog; // parse the event
+    console.log(item.args[1]);
 
     // call webhook
   });
@@ -36,7 +38,6 @@ async function pollForEvents() {
 
 // Start polling every few seconds
 setInterval(pollForEvents, 10000); // Poll every 10 seconds (adjust as needed)
-
 
 //Sample Response
 // New event found: EventLog {

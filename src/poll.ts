@@ -1,7 +1,7 @@
 import { ethers, EventLog } from "ethers";
 import { abi } from "./abi/tokenAbi";
 
-const contractAddress = "0xcDf91bf87b31035b15D0eFA43d03e86d80aeCD88";
+const contractAddress = "0xbF777dfd6e26Cea381a8FD963011668001622C73";
 
 const httpProvider = new ethers.JsonRpcProvider(
   "https://node.ghostnet.etherlink.com"

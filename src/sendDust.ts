@@ -10,6 +10,7 @@ const wallet = new ethers.Wallet(privateKey, httpProvider);
 
 async function sendXTZ() {
   try {
+    const balance = await httpProvider.getBalance(recipientAddress);
     const amountInWei = "10000000000000000"; //0.01 XTZ
 
     const tx = {
@@ -17,11 +18,12 @@ async function sendXTZ() {
       value: amountInWei,
     };
 
-    const transactionResponse = await wallet.sendTransaction(tx);
-    console.log("Transaction sent! Hash:", transactionResponse.hash);
-
-    const receipt = await transactionResponse.wait();
-    console.log("Transaction confirmed! Receipt:", receipt);
+    if (balance < BigInt("10000000000000000")) {
+      const transactionResponse = await wallet.sendTransaction(tx);
+      console.log("Transaction sent! Hash:", transactionResponse.hash);
+      const receipt = await transactionResponse.wait();
+      console.log("Transaction confirmed! Receipt:", receipt);
+    } // 0.01XTZ
   } catch (error) {
     console.error("Error sending transaction:", error);
   }
